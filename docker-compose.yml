@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  my-react-router-app:
+    container_name: kobert-frontend
+    image: kobert-frontend
+    build: ./my-react-router-app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - ai-api-server
+      - persona-api-server
+
+  ai-api-server:
+    container_name: kobert-ai
+    image: kobert-ai
+    build: ./ai-api-server
+    ports:
+      - "8000:8000"
+    depends_on:
+      - persona-api-server
+
+  persona-api-server:
+    container_name: kobert-data
+    image: kobert-data
+    build: ./persona-api-server
+    ports:
+      - "5000:5000"
